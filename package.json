@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "build": "lerna run build",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "lint:ci": "lerna run lint:ci"
   },
   "private": true,
   "dependencies": {
