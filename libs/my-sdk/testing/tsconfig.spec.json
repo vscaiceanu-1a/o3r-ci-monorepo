@@ -18,6 +18,7 @@
   },
   "include": [
     "../src/**/*.spec.ts",
-    "../src/**/*.perf.ts"
+    "../src/**/*.perf.ts",
+    "./setup-jest.ts"
   ]
 }
