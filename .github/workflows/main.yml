@@ -9,16 +9,20 @@ on:
     branches:
       - main
       - 'release/*'
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install
-        shell: bash
-        run: npm ci
+      - uses: ./.github/actions/setup
       - name: Build
-        run: npm run build # TODO: parametrize based on packageManager (yarn build)
+        run: npm run build
+
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Audit
+        run: npm audit

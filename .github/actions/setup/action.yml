@@ -1,0 +1,12 @@
+name: Setup and Install
+description: Sets up Node.js and installs dependencies
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install
+      shell: bash
+      run: npm ci
