@@ -1,5 +1,5 @@
 {
-  "name": "test-mono-sdk",
+  "name": "o3r-ci-monorepo",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
