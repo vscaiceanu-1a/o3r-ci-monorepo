@@ -1,11 +1,9 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
-    "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
@@ -21,7 +19,25 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "paths": {
+      "my-sdk": [
+        "libs/my-sdk/dist",
+        "libs/my-sdk/src/index"
+      ],
+      "my-sdk/fixtures": [
+        "libs/my-sdk/src/fixtures/jest"
+      ],
+      "my-sdk/*": [
+        "libs/my-sdk/dist/*",
+        "libs/my-sdk/src/*"
+      ],
+      "my-lib": [
+        "libs/my-lib/dist",
+        "libs/my-lib/src/public-api"
+      ]
+    },
+    "baseUrl": "."
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,0 +1,12 @@
+/* For IDE usage only */
+{
+  "extends": "../../tsconfig.json",
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

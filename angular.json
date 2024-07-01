@@ -3,5 +3,216 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "my-sdk": {
+      "projectType": "library",
+      "root": "libs/my-sdk",
+      "sourceRoot": "libs/my-sdk/src",
+      "prefix": "sdk",
+      "architect": {
+        "build": {
+          "builder": "@o3r/core:run-script",
+          "options": {
+            "script": "build"
+          }
+        },
+        "lint": {
+          "builder": "@o3r/core:run-script",
+          "options": {
+            "script": "lint"
+          }
+        },
+        "test": {
+          "builder": "@o3r/core:run-script",
+          "options": {
+            "script": "test"
+          }
+        }
+      }
+    },
+    "webapp": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@o3r/core:component": {
+          "path": "apps/webapp/src/components"
+        },
+        "@o3r/core:page": {
+          "path": "apps/webapp/src/app"
+        },
+        "@o3r/core:service": {
+          "path": "apps/webapp/src/services"
+        },
+        "@o3r/core:store": {
+          "path": "apps/webapp/src/store"
+        },
+        "@o3r/core:schematics-update": {
+          "path": "apps/webapp/src/schematics"
+        },
+        "@o3r/testing:playwright-scenario": {
+          "path": "apps/webapp/e2e-playwright/scenarios"
+        },
+        "@o3r/testing:playwright-sanity": {
+          "path": "apps/webapp/e2e-playwright/sanity"
+        }
+      },
+      "root": "apps/webapp",
+      "sourceRoot": "apps/webapp/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/webapp",
+            "index": "apps/webapp/src/index.html",
+            "browser": "apps/webapp/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "apps/webapp/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/webapp/src/favicon.ico",
+              "apps/webapp/src/assets"
+            ],
+            "styles": [
+              "apps/webapp/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all",
+              "outputPath": "apps/webapp/dist"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/webapp/src/environments/environment.ts",
+                  "with": "apps/webapp/src/environments/environment.development.ts"
+                }
+              ]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "webapp:build:production"
+            },
+            "development": {
+              "buildTarget": "webapp:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "webapp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "apps/webapp/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/webapp/src/favicon.ico",
+              "apps/webapp/src/assets"
+            ],
+            "styles": [
+              "apps/webapp/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "apps/webapp/.eslintrc.js",
+            "lintFilePatterns": [
+              "apps/webapp/src/**/*.ts"
+            ]
+          }
+        }
+      }
+    },
+    "my-lib": {
+      "projectType": "library",
+      "root": "libs/my-lib",
+      "sourceRoot": "libs/my-lib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "libs/my-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/my-lib/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "libs/my-lib/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "libs/my-lib/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "schematics": {
+    "*:ng-add": {
+      "registerDevtool": true
+    },
+    "*:*": {
+      "libsDir": "libs",
+      "appsDir": "apps"
+    },
+    "@o3r/core:component": {},
+    "@o3r/core:component-container": {},
+    "@o3r/core:component-presenter": {}
+  },
+  "cli": {
+    "schematicCollections": [
+      "@o3r/testing",
+      "@o3r/workspace",
+      "@o3r/core",
+      "@schematics/angular"
+    ],
+    "analytics": false
   }
 }
