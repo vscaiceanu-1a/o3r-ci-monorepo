@@ -30,3 +30,20 @@ jobs:
         run: npm audit
       - name: Lint
         run: npm run lint:ci
+  version:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    outputs:
+      nextVersionTag: ${{ steps.new-version.outputs.nextVersionTag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: New version
+        if: github.event_name != 'merge_group'
+        id: new-version
+        uses: AmadeusITGroup/otter/tools/github-actions/new-version@main
+        with:
+          defaultBranch: main
+          defaultBranchPrereleaseName: prerelease
+          releaseBranchRegExp: 'release\/(0|[1-9]\d*)\.(0|[1-9]\d*)(\.0-(?:next|prerelease|rc))?$'
