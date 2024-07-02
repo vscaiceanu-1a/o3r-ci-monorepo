@@ -47,3 +47,8 @@ jobs:
           defaultBranch: main
           defaultBranchPrereleaseName: prerelease
           releaseBranchRegExp: 'release\/(0|[1-9]\d*)\.(0|[1-9]\d*)(\.0-(?:next|prerelease|rc))?$'
+      - name: Create release
+        if: github.event_name != 'pull_request'
+        run: gh release create v${{ steps.new-version.outputs.nextVersionTag }} --generate-notes ${{ contains( steps.new-version.outputs.nextVersionTag, '-' ) && '--prerelease' || '' }} --target ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
