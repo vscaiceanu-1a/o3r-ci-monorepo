@@ -2,12 +2,12 @@
   "name": "my-lib",
   "version": "0.0.0-placeholder",
   "peerDependencies": {
+    "@angular-devkit/core": "^17.3.0",
+    "@angular-devkit/schematics": "^17.3.0",
     "@angular/common": "^17.3.0",
     "@angular/core": "^17.3.0",
     "@o3r/core": "^10.4.1",
-    "@o3r/schematics": "^10.4.2",
-    "@angular-devkit/schematics": "^17.3.0",
-    "@angular-devkit/core": "^17.3.0"
+    "@o3r/schematics": "^10.4.2"
   },
   "dependencies": {
     "tslib": "^2.3.0"
@@ -23,6 +23,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~17.3.0",
     "@angular-devkit/core": "^17.3.0",
+    "@angular-devkit/schematics": "^17.3.0",
     "@angular/cli": "^17.3.0",
     "@angular/common": "^17.3.0",
     "@angular/compiler": "^17.3.0",
@@ -32,27 +33,26 @@
     "@angular/platform-browser-dynamic": "^17.3.0",
     "@o3r/core": "^10.4.1",
     "@o3r/eslint-plugin": "^10.4.1",
-    "@schematics/angular": "~17.3.0",
-    "typescript": "~5.4.2",
-    "@angular-devkit/schematics": "^17.3.0",
     "@o3r/schematics": "^10.4.2",
-    "cpy-cli": "^5.0.0"
+    "@schematics/angular": "~17.3.0",
+    "cpy-cli": "^5.0.0",
+    "typescript": "~5.4.2"
   },
   "keywords": [
     "otter-module"
   ],
   "schematics": "./collection.json",
   "peerDependenciesMeta": {
-    "@angular-devkit/schematics": {
-      "optional": true
-    },
     "@angular-devkit/core": {
       "optional": true
     },
-    "@schematics/angular": {
+    "@angular-devkit/schematics": {
       "optional": true
     },
     "@o3r/schematics": {
+      "optional": true
+    },
+    "@schematics/angular": {
       "optional": true
     }
   }
